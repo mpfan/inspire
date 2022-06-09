@@ -1,0 +1,10 @@
+body, html, #root, .background {
+  height: 100%;
+  width: 100%;
+}
+
+.background {
+  background-image: url("/public/background.svg");
+  background-size: cover;
+  background-attachment: fixed;
+}
