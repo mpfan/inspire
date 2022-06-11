@@ -10,8 +10,10 @@
 
 .card-container-plus-button {
   background: transparent;
+  border-radius: 50%;
   border: none;
   padding: 1rem;
+  transition: 0.3s
 }
 
 .card-container-plus-button:focus {
