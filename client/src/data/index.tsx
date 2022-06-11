@@ -1,8 +1,6 @@
 export type PublicAPIData = {
-    api: string,
-    description: string,
-    auth: string,
-    https: string,
-    cors: string
-}
-
+  id: number;
+  url: string;
+  name: string;
+  description: string;
+};

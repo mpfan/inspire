@@ -1,0 +1,27 @@
+.card {
+  height: 20rem;
+  width: 15rem;
+
+  background-color: #fff;
+
+  padding: 1rem;
+}
+
+.card-delete-button {
+  background: transparent;
+  border: none;
+  padding: 0 0.1rem 0 0.1rem;
+  display: block;
+  margin-left: auto;
+}
+
+.card-delete-button:focus {
+  background-color: rgba(238, 85, 34, 0.6);
+  border-radius: 50%;
+}
+
+.card-delete-button:hover {
+  background-color: rgba(238, 85, 34, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+}
