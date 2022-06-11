@@ -3,6 +3,7 @@ html,
 #root {
   height: 100%;
   width: 100%;
+  font-family: Sans-Serif, Helvetica, Arial;
 }
 
 .background {
