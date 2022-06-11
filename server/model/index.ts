@@ -1,6 +1,8 @@
-import { Sequelize } from 'sequelize';
+// Models
+import { Sequelize } from "sequelize/types";
+import { CreatePublicAPI } from "./PublicAPI";
 
-const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: "./local/data/test.db",
-});
+export const initDb = async (sequelize: Sequelize) => {
+  CreatePublicAPI(sequelize);
+  await sequelize.sync();
+};

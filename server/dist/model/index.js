@@ -8,20 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const model_1 = require("./model");
-const app = (0, express_1.default)();
-const port = process.env.PORT;
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, model_1.initDb)();
-    app.get('/', (req, res) => {
-        res.send('Express + TypeScript Server');
-    });
-    app.listen(port, () => {
-        console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-    });
-}))();
+exports.initDb = void 0;
+const sequelize_1 = require("sequelize");
+// Models
+const PublicAPI_1 = require("./PublicAPI");
+const sequelize = new sequelize_1.Sequelize({
+    dialect: "sqlite",
+    storage: process.env.CONNECTION_STRING,
+});
+const initDb = () => __awaiter(void 0, void 0, void 0, function* () {
+    (0, PublicAPI_1.CreatePublicAPI)(sequelize);
+    yield sequelize.sync();
+});
+exports.initDb = initDb;
