@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import cors from "cors";
 
 import { initDb } from "./model";
 
@@ -15,6 +16,8 @@ const port: string | undefined = process.env.PORT;
   logger.info("Initializing database...");
   await initDb(sequelize);
   logger.info("Database initialized successfully...");
+
+  app.use(cors());
 
   logger.info("Initializing routes...");
   app.use(publicAPIRouter);
