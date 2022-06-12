@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { BsX, BsFillFileEarmarkExcelFill } from "react-icons/bs";
+import {
+  BsX,
+  BsFillFileEarmarkExcelFill,
+  BsFillLightbulbFill,
+} from "react-icons/bs";
 
 import "./Card.css";
 import { getPublicAPI, PublicAPIData } from "../data";
@@ -24,8 +28,8 @@ const Card = (props: CardProps) => {
         setPublicAPIData(data);
         setErrorMessage("");
       })
-      .catch((error: any) => {
-        const message = error as string;
+      .catch((error: Error) => {
+        const message = error.message;
         setErrorMessage(message);
       });
 
@@ -45,16 +49,30 @@ const Card = (props: CardProps) => {
         <BsX color="#ee5522" size={20} />
       </button>
       <div className="card-body">
-        {errorMessage.length > 0 && (
+        {errorMessage.length > 0 ? (
           <div className="card-error">
             <BsFillFileEarmarkExcelFill color="#ee5522" size={50} />
             <p>{errorMessage}</p>
           </div>
+        ) : (
+          <>
+            <div>
+              <BsFillLightbulbFill size={70} />
+            </div>
+            <h1 className="card-data-title">
+              <a
+                href={publicAPIData?.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {publicAPIData?.name}
+              </a>
+            </h1>
+            <div className="card-data-content">
+              {publicAPIData?.description}
+            </div>
+          </>
         )}
-        <h1 className="card-data-title">
-          <a href={publicAPIData?.url}>{publicAPIData?.name}</a>
-        </h1>
-        <div className="card-data-content">{publicAPIData?.description}</div>
       </div>
     </div>
   );
