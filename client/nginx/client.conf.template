@@ -4,7 +4,7 @@ server {
     root /usr/share/html;
 
     location /api {
-        proxy_pass http://inspire-server:4000;
+        proxy_pass ${SERVER_URL};
     }
 
     location / {

@@ -12,9 +12,9 @@ FROM nginx
 RUN rm /usr/share/nginx/html/*
 RUN rm /etc/nginx/conf.d/*
 
-COPY --from=builder /usr/src/app/nginx/*.conf /etc/nginx/conf.d/
+COPY --from=builder /usr/src/app/nginx/client.conf.template /etc/nginx/conf.d/
 COPY --from=builder /usr/src/app/build/ /usr/share/html/
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/bash", "-c", "envsubst '${SERVER_URL}' < /etc/nginx/conf.d/client.conf.template > /etc/nginx/conf.d/client.conf && nginx -g 'daemon off;'"] 
