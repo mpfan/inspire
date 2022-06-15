@@ -18,4 +18,4 @@ yarn-error.log*
 local
 scripts
 dist
-.env
+.compose.swp

@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  inspire-client:
+    image: node:18
+    working_dir: /usr/src/app
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/usr/src/app
+    depends_on:
+      - inspire-server
+    networks:
+      - inspire-network
+  inspire-server:
+    image: node:18
+    working_dir: /usr/src/app
+    command: npm run dev
+    environment:
+      - CONNECTION_STRING=postgres://postgres:localpwd@inspire-db:5432/postgres
+    ports:
+      - 4000:4000
+    volumes:
+      - ./server:/usr/src/app
+    depends_on:
+      inspire-db:
+        condition: service_healthy
+    networks:
+      - inspire-network
+  inspire-db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=localpwd
+    ports:
+      - 5432:5432
+    volumes:
+      - inspire-db-data:/var/lib/postgresql/data
+    networks:
+      - inspire-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+networks:
+  inspire-network:
+volumes:
+  inspire-db-data:
