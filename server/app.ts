@@ -10,7 +10,7 @@ import { publicAPIRouter } from "./route/PublicApiRoute";
 import { defaultRouter } from "./route/DefaultRoute";
 
 const app: Express = express();
-const port: number = 4000;
+const port = 4000;
 
 (async () => {
   logger.info("Initializing database...");
